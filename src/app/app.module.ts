@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { DogsComponent } from './dogs/dogs.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DogsComponent
+    DogsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

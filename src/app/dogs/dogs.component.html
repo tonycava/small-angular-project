@@ -1,8 +1,15 @@
 <h1 id="title">Dogs Listings</h1>
 
+<app-loading [isLoading]="true" />
+
 <ul id="list-dogs">
   <li class="dog-item" *ngFor="let dog of dogs">
-    <img width="100" height="100" src="{{ dog.img }}" alt="image of the dog {{ dog.name }}">
+    <img
+      width="100"
+      height="100"
+      src="{{ dog.img }}"
+      alt="image of the dog {{ dog.name }}"
+    >
     <span>{{ dog.name }}</span>
     <button (click)="deleteDog(dog)">Delete</button>
   </li>
