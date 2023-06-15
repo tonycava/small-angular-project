@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-loading',
+  selector: 'loading',
   template: `
     <div *ngIf="isLoading" class="loading">
       <div class="spinner"></div>

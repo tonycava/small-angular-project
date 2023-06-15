@@ -1,6 +1,6 @@
-<h1 id="title">Dogs Listings</h1>
+<h1 *ngIf="!isLoading" id="title">Dogs Listings</h1>
 
-<app-loading [isLoading]="true" />
+<loading [isLoading]="isLoading" />
 
 <ul id="list-dogs">
   <li class="dog-item" *ngFor="let dog of dogs">

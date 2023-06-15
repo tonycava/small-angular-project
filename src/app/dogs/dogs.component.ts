@@ -10,6 +10,7 @@ import { Subscription } from "rxjs";
 })
 export class DogsComponent {
   dogs: Dog[] = []
+  isLoading = true;
   private subscription: Subscription = new Subscription();
 
   constructor(private dogService: DogService) {
@@ -27,6 +28,7 @@ export class DogsComponent {
     this.subscription = this.dogService.getDogs().subscribe(
       (dogs) => {
         this.dogs = dogs;
+        this.isLoading = false;
       },
       (error: any) => {
         console.error(error);
@@ -38,7 +40,9 @@ export class DogsComponent {
   }
 
   async deleteDog(dog: Dog): Promise<void> {
+    this.isLoading = true;
     await this.dogService.deleteDog(dog.id).toPromise()
     this.dogs = this.dogs.filter((currentDog) => currentDog.id !== dog?.id)
+    this.isLoading = false;
   }
 }
