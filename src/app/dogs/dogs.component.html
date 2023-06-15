@@ -1,16 +1,54 @@
-<h1 *ngIf="!isLoading" id="title">Dogs Listings</h1>
+<h1 id="title">Dogs Listings</h1>
 
 <loading [isLoading]="isLoading" />
 
 <ul id="list-dogs">
-  <li class="dog-item" *ngFor="let dog of dogs">
+  <li
+    class="dog-item"
+    *ngFor="let dog of dogs; let i = index;"
+  >
     <img
-      width="100"
-      height="100"
-      src="{{ dog.img }}"
+      priority="true"
+      width="800"
+      height="200"
+      ngSrc="{{ dog.img }}"
       alt="image of the dog {{ dog.name }}"
     >
-    <span>{{ dog.name }}</span>
-    <button (click)="deleteDog(dog)">Delete</button>
+    <div>
+      <div id="container">
+        <input
+          [(ngModel)]="uptadingDog.newName"
+          *ngIf="i === uptadingDog.idx"
+        />
+        <span *ngIf="!(i === uptadingDog.idx)">{{ dog.name }}</span>
+
+        <button
+          style="height: min-content; margin-top: auto;"
+          *ngIf="!(i === uptadingDog.idx)"
+          (click)="uptadingDog = { idx: i, newName: '' }"
+        >Change Name
+        </button>
+        <button
+          *ngIf="i === uptadingDog.idx"
+          (click)="uptadingDog = { idx: -1, newName: '' }"
+        >Cancel
+        </button>
+      </div>
+
+      <button
+        id="updateButton"
+        class="w-full"
+        *ngIf="i === uptadingDog.idx"
+        (click)="updateDog(dog)"
+      >Update
+      </button>
+
+    </div>
+    <button
+      id="{{!(i  === uptadingDog.idx) && 'deleteButton'}}"
+      class="w-full"
+      (click)="deleteDog(dog)"
+    >Delete
+    </button>
   </li>
 </ul>

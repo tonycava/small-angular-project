@@ -10,6 +10,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { DogsComponent } from './dogs/dogs.component';
 import { LoadingComponent } from './loading/loading.component';
+import { NgOptimizedImage } from "@angular/common";
+
 
 @NgModule({
   declarations: [
@@ -27,9 +29,11 @@ import { LoadingComponent } from './loading/loading.component';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
