@@ -16,17 +16,7 @@ export class DogsComponent {
   }
 
   ngOnInit(): void {
-    this.subscription = this.dogService.getDogs().subscribe(
-      (data) => {
-        this.dogs = data
-      },
-      (error: any) => {
-        console.error(error);
-      },
-      () => {
-        console.log('Observable completed');
-      }
-    );
+    this.getDogs()
   }
 
   ngOnDestroy(): void {
@@ -34,11 +24,21 @@ export class DogsComponent {
   }
 
   getDogs(): void {
+    this.subscription = this.dogService.getDogs().subscribe(
+      (dogs) => {
+        this.dogs = dogs;
+      },
+      (error: any) => {
+        console.error(error);
+      },
+    );
   }
 
   updateDog(dog: Dog): void {
   }
 
-  deleteDog(dog: Dog): void {
+  async deleteDog(dog: Dog): Promise<void> {
+    await this.dogService.deleteDog(dog.id).toPromise()
+    this.dogs = this.dogs.filter((currentDog) => currentDog.id !== dog?.id)
   }
 }
